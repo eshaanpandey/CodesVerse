@@ -1,5 +1,4 @@
-import { problemModel } from "../models/problemModel";
-import { testcasesModel } from "../models/testcasesModel";
+import { testcasesModel } from "../models/testcasesModel.js";
 
 const addTestcase = async(req, res) =>{
     try {
