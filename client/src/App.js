@@ -1,25 +1,27 @@
-import logo from "./logo.svg";
-import "./App.css";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { redirect } from "react-router-dom";
+import './App.css';
+import LoginScreen from "./screens/LoginScreen.jsx";
+
+import { useEffect } from "react";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Routes>
+  
+      <Route path="/" element={<Navigate to="/home" />} />
+      <Route path="/login" element={<LoginScreen />} />
+      {/* <Route
+        path="/:type"
+        element={
+          <HomeLayout>
+            <HomeScreen />
+          </HomeLayout>
+        }
+      /> */}
+      {/* <Route path="/problem/:_id" element={<SubmitProblemScreen />} /> */}
+    </Routes>
+);
 }
 
 export default App;
