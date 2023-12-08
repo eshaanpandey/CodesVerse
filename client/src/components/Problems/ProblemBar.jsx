@@ -1,10 +1,10 @@
 import classNames from "classnames";
 import React from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function ProblemBar({ number, name, _id, difficulty }) {
   return (
-    // <Link to={`/problem/${_id}`} className="flex flex-row items-center justify-between w-full p-4 mt-2 text-base bg-white rounded-lg shadow-xl cursor-pointer hover:bg-purple-700">
+    <Link to={`/problem/${_id}`} className="flex flex-row items-center justify-between w-full p-4 mt-2 text-base bg-white rounded-lg shadow-xl cursor-pointer hover:bg-blue-700">
       <div>
         <div className="flex flex-row">
             <h1 className="">
@@ -20,9 +20,9 @@ function ProblemBar({ number, name, _id, difficulty }) {
             })}
         >
             <h1>{difficulty}</h1>
-        </div>`
+        </div>
       </div>
-    // </Link>
+     </Link>
   );
 }
 

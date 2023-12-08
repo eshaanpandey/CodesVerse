@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 
 import LogoHeaderArea from "../components/Headers/LogoHeaderArea";
 import ProblemDescription from "../components/Problems/ProblemDescription";
+import ExampleArea from "../components/Problems/ExampleArea";
+import ConstraintsArea from "../components/Problems/ConstraintsArea";
+import ProblemBar from "../components/Problems/ProblemBar";
 
 import { useParams } from "react-router-dom";
 
@@ -17,8 +20,8 @@ function SubmitProblemScreen() {
     // }, []);
   
     return (
-      <div className="w-full h-screen text-white bg-zinc-900">
-        <div className="" style={{ height: "13%" }}>
+      <div className="w-full h-screen text-black bg-cyan-100">
+        <div className="" style={{ height: "11%" }}>
           <LogoHeaderArea />
         </div>
         <div
@@ -26,6 +29,25 @@ function SubmitProblemScreen() {
           style={{ fontFamily: "cursive" }}
         >
           <ProblemDescription problem={problem} />
+          
+          <div 
+            className="flex flex-row w-full h-5/6"
+            style={{ fontFamily: "cursive" }}>
+            <ExampleArea/>
+          </div>
+
+          <div 
+            className="flex flex-row w-full h-5/6"
+            style={{ fontFamily: "cursive" }}>
+            <ConstraintsArea/>
+          </div>
+
+          <div 
+            className="flex flex-row w-full h-5/6"
+            style={{ fontFamily: "cursive" }}>
+            <ProblemBar/>
+          </div>
+
           {/* <CompilerArea problemId={_id} /> */}
         </div>
       </div>
