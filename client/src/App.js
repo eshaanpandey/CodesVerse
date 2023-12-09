@@ -22,7 +22,7 @@ function App() {
           </HomeLayout>
         }
       /> }
-      <Route path="/problem/:_id" element={<SubmitProblemScreen />} />
+      <Route path="/problems/:_id" element={<SubmitProblemScreen />} />
     </Routes>
 );
 }
