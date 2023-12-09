@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import LogoHeaderArea from "../components/Headers/LogoHeaderArea";
 import ProblemDescription from "../components/Problems/ProblemDescription";
 import ExampleArea from "../components/Problems/ExampleArea";
-import ConstraintsArea from "../components/Problems/ConstraintsArea";
+// import ConstraintsArea from "../components/Problems/ConstraintsArea";
 import ProblemBar from "../components/Problems/ProblemBar";
 
 import { useParams } from "react-router-dom";
@@ -26,7 +26,7 @@ function SubmitProblemScreen() {
         </div>
         <div
           className="flex flex-row w-full h-5/6"
-          style={{ fontFamily: "cursive" }}
+          style={{ fontFamily: "serif" }}
         >
           <ProblemDescription problem={problem} />
           
@@ -34,12 +34,6 @@ function SubmitProblemScreen() {
             className="flex flex-row w-full h-5/6"
             style={{ fontFamily: "cursive" }}>
             <ExampleArea/>
-          </div>
-
-          <div 
-            className="flex flex-row w-full h-5/6"
-            style={{ fontFamily: "cursive" }}>
-            <ConstraintsArea/>
           </div>
 
           <div 
