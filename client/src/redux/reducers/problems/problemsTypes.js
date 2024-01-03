@@ -1,0 +1,2 @@
+export const GET_PROBLEMS_LIST = "GET_PROBLEMS_LIST";
+export const GET_PROBLEM_BY_ID = "GET_PROBLEM_BY_ID";
