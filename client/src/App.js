@@ -7,8 +7,16 @@ import HomeLayout from "./layouts/HomeLayout.jsx";
 import SubmitProblemScreen from "./screens/SubmitProblemsScreen.jsx";
 
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getLoggedInUser } from "./redux/reducers/user/userActions.js";
+
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getLoggedInUser());
+  }, []);
+
   return (
     <Routes>
   
