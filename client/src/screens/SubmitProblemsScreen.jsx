@@ -7,17 +7,19 @@ import ExampleArea from "../components/Problems/ExampleArea";
 import ProblemBar from "../components/Problems/ProblemBar";
 
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getProblemById } from "../redux/reducers/problems/problemsActions";
 
 function SubmitProblemScreen() {
     const [problem, setProblem] = useState({});
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const { _id } = useParams();
   
-    // useEffect(() => {
-    //   dispatch(getProblemById(_id)).then((data) => {
-    //     setProblem(data.payload.data.problem);
-    //   });
-    // }, []);
+    useEffect(() => {
+      dispatch(getProblemById(_id)).then((data) => {
+        setProblem(data.payload.data.problem);
+      });
+    }, []);
   
     return (
       <div className="w-full h-screen text-black bg-cyan-100">
