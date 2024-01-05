@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.post('/addProblem', addProblem);
 router.delete('/deleteProblem/:_id', deleteProblem);
-router.get('/viewProblem', viewProblem);
+router.get('/viewProblem/:_id', viewProblem);
 router.get('/viewAllProblems', viewAllProblems);
 router.put('/updateProblem/:_id', updateProblem);
 
