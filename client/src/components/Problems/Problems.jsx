@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import ProblemBar from "./ProblemBar";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Dna } from "react-loader-spinner";
-// import { getProblemsList } from "../../redux/reducers/problems/problemsActions";
+import { getProblemsList } from "../../redux/reducers/problems/problemsActions";
 
 function Problems() {
   const [problems, setProblems] = useState();
 
-//   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-//   useEffect(() => {
-//     dispatch(getProblemsList()).then((data) => {
-//       setProblems(data.payload.data.problems);
-//     });
-//   }, []);
+  useEffect(() => {
+    dispatch(getProblemsList()).then((data) => {
+      setProblems(data.payload.data.problems);
+    });
+  }, []);
 
   return (
     <div className="flex items-center justify-center w-full h-full p-10">

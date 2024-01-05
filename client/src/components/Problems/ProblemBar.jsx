@@ -14,9 +14,9 @@ function ProblemBar({ number, name, _id, difficulty }) {
         </div>
         <div
             className={classNames("rounded-lg p-2", {
-            "bg-green-500": difficulty == "Easy",
-            "bg-yellow-500": difficulty == "Medium",
-            "bg-red-500": difficulty == "Hard",
+            "bg-green-500": difficulty === "Easy",
+            "bg-yellow-500": difficulty === "Medium",
+            "bg-red-500": difficulty === "Hard",
             })}
         >
             <h1>{difficulty}</h1>

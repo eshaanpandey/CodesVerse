@@ -10,9 +10,9 @@ function ProblemDescription({ problem }) {
         <h1 className="text-2xl font-bold">{problem.name}</h1>
         <div
           className={classNames("text-lg", {
-            "text-green-500": problem.difficulty == "Easy",
-            "text-yellow-500": problem.difficulty == "Medium",
-            "text-red-500": problem.difficulty == "Hard",
+            "text-green-500": problem.difficulty === "Easy",
+            "text-yellow-500": problem.difficulty === "Medium",
+            "text-red-500": problem.difficulty === "Hard",
           })}
         >
           <h1>{problem.difficulty}</h1>
