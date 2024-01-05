@@ -2,6 +2,9 @@ import React, { useState } from "react";
 
 import SignupForm from "../components/Form/SignupForm.jsx";
 import LoginForm from "../components/Form/LoginForm.jsx";
+import LogoHeaderArea from "../components/Headers/LogoHeaderArea.jsx";
+
+import { useSelector } from "react-redux";
 
 function LoginScreen() {
     const [isLogin, setIsLogin] = useState(true);
@@ -11,7 +14,7 @@ function LoginScreen() {
         style={{ fontFamily: "cursive", backgroundColor: "#8D8FAF" }}
       >
         <div className="flex h-40">
-          {/* <LogoHeaderArea /> */}
+          <LogoHeaderArea />
         </div>
         <div className="flex items-center justify-center w-full h-full p-5">
           {isLogin ? (
