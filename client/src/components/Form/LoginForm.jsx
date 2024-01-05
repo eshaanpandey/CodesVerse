@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import InputWithLabel from "./InputWithLabel";
 import CustomButton from "../CustomButton";
-// import { useDispatch } from "react-redux";
-// import { signup } from "../../redux/reducers/auth/authActions";
+import { useDispatch } from "react-redux";
+import { signup } from "../../redux/reducers/auth/authActions";
 
 function SignupForm({ setIsLogin }) {
   function loginHandler() {
@@ -14,19 +14,19 @@ function SignupForm({ setIsLogin }) {
     setUserData((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
-//   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [errorMessage, setErrorMessage] = useState();
 
-//   function onSignUp() {
-//     console.log(userData);
-//     dispatch(signup(userData)).then((data) => {
-//       if (data.type == "ERROR") {
-//         console.log(data.payload.response.data)
-//         setErrorMessage(data.payload.response.data.error);
-//       }
-//     });
-//   }
+  function onSignUp() {
+    console.log(userData);
+    dispatch(signup(userData)).then((data) => {
+      if (data.type === "ERROR") {
+        console.log(data.payload.response.data)
+        setErrorMessage(data.payload.response.data.error);
+      }
+    });
+  }
 
   return (
     <div className="">
@@ -70,7 +70,7 @@ function SignupForm({ setIsLogin }) {
           </div>
         )}
         <CustomButton
-        //   onPress={onSignUp}
+          onPress={onSignUp}
           text={"Sign Up"}
           bgColor={"black"}
           textColor="white"
