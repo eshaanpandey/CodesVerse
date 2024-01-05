@@ -5,12 +5,12 @@ import { SIGN_IN, SIGN_OUT, SIGN_UP } from "./authTypes";
 export const signin = (userData) => async (dispatch) => {
   try {
     const user = await axios({
-      url: "http://localhost:4000/codeslayer/auth/signin",
+      url: "http://localhost:4000/judge/auth/login",
       method: "POST",
       data: userData,
     });
 
-    localStorage.setItem("codeslayerUser", JSON.stringify(user.data.token));
+    localStorage.setItem("judgeUser", JSON.stringify(user.data.token));
 
     window.location.href = "/home";
 
