@@ -1,0 +1,2 @@
+export const RUN_A_PROGRAM = "RUN_A_PROGRAM";
+export const SUBMIT_A_SOLUTION = "SUBMIT_A_SOLUTION";
