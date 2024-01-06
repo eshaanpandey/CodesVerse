@@ -31,12 +31,6 @@ function SubmitProblemScreen() {
           style={{ fontFamily: "serif" }}
         >
           <ProblemDescription problem={problem} />
-          
-          <div 
-            className="flex flex-row w-full h-5/6"
-            style={{ fontFamily: "cursive" }}>
-            <ExampleArea/>
-          </div>
 
           <div 
             className="flex flex-row w-full h-5/6"

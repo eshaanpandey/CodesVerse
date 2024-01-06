@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProblemBar from "./ProblemBar";
 import { useDispatch } from "react-redux";
-import { Dna } from "react-loader-spinner";
+import { DNA } from "react-loader-spinner";
 import { getProblemsList } from "../../redux/reducers/problems/problemsActions";
 
 function Problems() {
@@ -16,15 +16,15 @@ function Problems() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center w-full h-full p-10">
+    <div className="flex items-center justify-center w-full h-full p-10 ">
       <div className="w-1/2 h-full">
-        <h1 className="text-3xl">Problems :</h1>
+        <h1 className="text-3xl">Problems:</h1>
         {problems ? (
           problems.map((problem, index) => {
             return <ProblemBar number={index + 1} {...problem} />;
           })
         ) : (
-          <Dna
+          <DNA
             visible={true}
             height="200"
             width="200"
