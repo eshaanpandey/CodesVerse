@@ -2,8 +2,8 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import Home from "../components/Home/Home";
 import Problems from "../components/Problems/Problems";
-import Contests from "../Contests/Contests";
-import Profile from "../Profile/Profile";
+import Contests from "../components/Contests/Contests";
+import Profile from "../components/Profile/Profile";
 
 function HomeScreen() {
     const { type } = useParams();
