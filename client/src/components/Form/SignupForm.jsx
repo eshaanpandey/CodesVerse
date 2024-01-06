@@ -52,7 +52,7 @@ function SignupForm({ setIsLogin }) {
             label={"Enter your Username"}
             palceholder={"Username"}
             handleChange={handleChange}
-            id={"userName"}
+            id={"username"}
           />
           <InputWithLabel
             type={"password"}
