@@ -10,8 +10,8 @@ function LoginScreen() {
     const [isLogin, setIsLogin] = useState(true);
     return (
       <div
-        className="flex flex-col w-full min-h-screen"
-        style={{ fontFamily: "cursive", backgroundColor: "#8D8FAF" }}
+        className="flex flex-col w-full min-h-screen bg-cyan-100"
+        style={{ fontFamily: "cursive"}}
       >
         <div className="flex h-40">
           <LogoHeaderArea />
