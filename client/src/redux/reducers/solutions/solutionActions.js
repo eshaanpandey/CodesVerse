@@ -34,4 +34,7 @@ const submitSolution =
     }
   };
 
-export { runProgram, submitSolution };
+export { 
+  // runProgram, 
+  submitSolution 
+};
