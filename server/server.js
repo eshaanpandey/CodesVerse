@@ -14,6 +14,10 @@ import session from "express-session";
 import db from "./database/index.js";
 import router from "./routes/index.js";
 
+import routeConfig from "./config/routeConfig.js";
+
+routeConfig(passport);
+
 const app = express();
 app.use(cors());
 app.use(helmet());
