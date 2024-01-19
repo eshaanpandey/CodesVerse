@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import LogoHeaderArea from "../components/Headers/LogoHeaderArea";
 import ProblemDescription from "../components/Problems/ProblemDescription";
-import ExampleArea from "../components/Problems/ExampleArea";
-// import ConstraintsArea from "../components/Problems/ConstraintsArea";
-import ProblemBar from "../components/Problems/ProblemBar";
+import CompilerArea from "../components/Compiler/CompilerArea";
 
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -28,17 +26,11 @@ function SubmitProblemScreen() {
         </div>
         <div
           className="flex flex-row w-full h-5/6"
-          style={{ fontFamily: "serif" }}
+          style={{ fontFamily: "revert-layer" }}
         >
           <ProblemDescription problem={problem} />
 
-          <div 
-            className="flex flex-row w-full h-5/6"
-            style={{ fontFamily: "cursive" }}>
-            <ProblemBar/>
-          </div>
-
-          {/* <CompilerArea problemId={_id} /> */}
+          <CompilerArea problemId={_id} />
         </div>
       </div>
     );
