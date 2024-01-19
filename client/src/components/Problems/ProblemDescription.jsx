@@ -9,7 +9,7 @@ function ProblemDescription({ problem }) {
       <div className="flex flex-col w-full">
         <h1 className="text-2xl font-bold">{problem.heading}</h1>
         <div
-          className={classNames("text-lg text-center font-semibold bg-white", {
+          className={classNames("text-lg text-center cursive bg-white", {
             "text-green-500": problem.difficulty === "Easy",
             "text-yellow-500": problem.difficulty === "Medium",
             "text-red-500": problem.difficulty === "Hard",

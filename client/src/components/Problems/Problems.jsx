@@ -16,8 +16,8 @@ function Problems() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center w-full h-full p-10 ">
-      <div className="w-1/2 h-full">
+    <div className="flex items-center justify-center w-full p-5 ">
+      <div className="w-1/2 ">
         <h1 className="text-3xl">Problems:</h1>
         {problems ? (
           problems.map((problem, index) => {
