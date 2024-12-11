@@ -8,7 +8,7 @@ function ProblemBar({ number, heading, _id, difficulty }) {
       {/* <div className="flex-grow"> */}
         <div className="flex items-center">
             <h1 className=" mr-2">
-            {number}{".)"}
+            {number}{"."}
             </h1>
             <h1 className="ml-2">{heading}</h1>
         </div>

@@ -112,10 +112,7 @@ function CompilerArea({ problemId }) {
                   leaveTo="opacity-0 scale-95"
                 >
                   <Dialog.Panel className="w-full max-w-md p-6 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-                    <div
-                      className="flex flex-col items-center justify-center w-full h-full"
-                      style={{ fontFamily: "cursive" }}
-                    >
+                    <div className="flex flex-col items-center justify-center w-full h-full" style={{ fontFamily: "cursive" }}>
                       {solution ? (
                         <>
                           <h1 className="text-xl">Your Submission</h1>
@@ -127,18 +124,9 @@ function CompilerArea({ problemId }) {
                             <h1>Verdict : {solution.verdict || "Unknown"}</h1>
                             <h1>Status : {solution.message || "No status available"}</h1>
                           </div>
-
                         </>
                       ) : (
-                        <Triangle
-                          height="100"
-                          width="100"
-                          color="#FF0099"
-                          ariaLabel="triangle-loading"
-                          wrapperStyle={{}}
-                          wrapperClassName=""
-                          visible={true}
-                        />
+                        <Triangle height="100" width="100" color="#FF0099" ariaLabel="triangle-loading" visible={true} />
                       )}
                     </div>
                   </Dialog.Panel>
@@ -156,7 +144,7 @@ function CompilerArea({ problemId }) {
         <div className="flex flex-row justify-end px-4">
           <div className="flex items-center justify-center p-2 text-lg">
             <CustomButton
-              bgColor="#FF7B00"
+              bgColor="#D3D3D3" 
               textColor="black"
               text={"Run Code"}
               fontSize={"1.125rem"}
@@ -165,7 +153,7 @@ function CompilerArea({ problemId }) {
           </div>
           <div className="flex items-center justify-center p-2 text-lg">
             <CustomButton
-              bgColor="#FF0099"
+              bgColor="#32CD32" 
               textColor="black"
               text={"Submit"}
               fontSize={"1.125rem"}
