@@ -5,7 +5,7 @@ import { DNA } from "react-loader-spinner";
 import { getProblemsList } from "../../redux/reducers/problems/problemsActions";
 
 function Problems() {
-  const [problems, setProblems] = useState();
+  const [problems, setProblems] = useState(null);
 
   const dispatch = useDispatch();
 

@@ -12,7 +12,7 @@ import classNames from "classnames";
 function CompilerArea({ problemId }) {
   const [code, setCode] = useState();
 
-  const [solution, setSolution] = useState();
+  const [solution, setSolution] = useState(null);
 
   let [isOpen, setIsOpen] = useState(false);
 
@@ -36,17 +36,26 @@ function CompilerArea({ problemId }) {
     ).then((data) => {
       console.log(data.payload);
       if (!data.payload.data) {
-        if (data.payload.response.data.error.stderr)
+        if (data.payload.response.data.error.stderr) {
           setSolution({
             verdict: "Fail",
-            message: data.payload.response.data.error.stderr.split("error:")[1],
+            message: data.payload.response.data.error.stderr.split("error:")[1] || "Unknown error",
           });
-        else
+        } else {
           setSolution({
             verdict: "Fail",
-            message: data.payload.response.data.error,
+            message: String(data.payload.response.data.error || "Unknown error"),
           });
-      } else setSolution(data.payload.data);
+        }
+      } else {
+        const verdict = data.payload.data.verdict === "Pass" ? "Pass" : "Fail";
+        const message = data.payload.data.message || "Solution passed successfully";
+        setSolution({
+          verdict,
+          message,
+        });
+      }
+      
     });
     openModal();
   }
@@ -111,15 +120,14 @@ function CompilerArea({ problemId }) {
                         <>
                           <h1 className="text-xl">Your Submission</h1>
                           <div className="w-full h-px my-4 bg-black"></div>
-                          <div
-                            className={classNames("text-xl", {
-                              "text-green-500": solution.verdict === "Pass",
-                              "text-red-500": solution.verdict === "Fail",
-                            })}
-                          >
-                            <h1>Verdict : {solution.verdict}</h1>
-                            <h1>Status : {solution.message}</h1>
+                          <div className={classNames("text-xl", {
+                            "text-green-500": solution.verdict === "Pass",
+                            "text-red-500": solution.verdict === "Fail",
+                          })}>
+                            <h1>Verdict : {solution.verdict || "Unknown"}</h1>
+                            <h1>Status : {solution.message || "No status available"}</h1>
                           </div>
+
                         </>
                       ) : (
                         <Triangle

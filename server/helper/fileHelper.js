@@ -35,14 +35,16 @@ if (!fs.existsSync(inputPath)) {
 
 const executeCpp = async (filePath, input) => {
   const jobId = path.basename(filePath).split(".")[0];
-  const outPath = path.join(outputPath, `${jobId}.exe`);
+  // const outPath = path.join(outputPath, `${jobId}.exe`); // for Windows
+  const outPath = path.join(outputPath, jobId); // for MacOS
 
   const inPath = path.join(inputPath, `${jobId}.txt`);
   await fs.writeFileSync(inPath, input);
 
   return new Promise((resolve, reject) => {
     exec(
-      `g++ ${filePath} -o ${outPath} && cd ${outputPath} && .\\${jobId}.exe < ${inPath}`,
+      // `g++ ${filePath} -o ${outPath} && cd ${outputPath} && .\\${jobId}.exe < ${inPath}`, // for Windows
+      `g++ ${filePath} -o ${outPath} && cd ${outputPath} && ./${jobId} < ${inPath}`,
       (error, stdout, stderr) => {
         if (error) {
           reject({ error, stderr });

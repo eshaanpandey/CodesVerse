@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { getProblemById } from "../redux/reducers/problems/problemsActions";
 
 function SubmitProblemScreen() {
-    const [problem, setProblem] = useState({});
+    const [problem, setProblem] = useState(null); 
     const dispatch = useDispatch();
     const { _id } = useParams();
   

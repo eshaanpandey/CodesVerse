@@ -1,4 +1,7 @@
 import { solutionsModel } from "../models/solutionsModel.js";
+import { testcasesModel } from "../models/testcasesModel.js";
+import { generateFile } from "../helper/fileHelper.js";
+import { executeCpp } from "../helper/fileHelper.js";
 
 const addSolution = async(req, res) =>{
     try {
@@ -27,20 +30,28 @@ const runAProblem = async (req, res) => {
       const { language = "c++", code } = req.body;
       const { problemId } = req.params;
       const userId = req.session.passport.user._doc._id;
+
+      // console.log("Received code: ", code);
   
-      const testcases = await TestcasesModel.find({
+      const testcases = await testcasesModel.find({
         problem: problemId,
-        isExample: true,
+        // isExample: true,
       });
   
       if (!code) {
         return res.status(404).json({ success: false, error: "Empty code !!" });
+      }
+
+      if (!testcases.length) {
+        return res.status(404).json({ success: false, error: "No test cases found!" });
       }
   
       const filePath = await generateFile(language, code);
       for (let i = 0; i < testcases.length; i++) {
         const testcase = testcases[i];
         const output = await executeCpp(filePath, testcase.input);
+        // console.log("Execution Output:", output);
+
         const pureStringOutout = output.replace(/(?:\r\n|\r|\n)/g, "");
         const pureStringtestcaseOutput = testcase.output.replace(
           /(?:\r\n|\r|\n)/g,
@@ -51,19 +62,21 @@ const runAProblem = async (req, res) => {
           pureStringtestcaseOutput.toLowerCase();
   
         if (!success) {
+          // console.log("Tesecase failed")
           return res.status(200).json({
             verdict: "Fail",
             message: `Wrong Answer on testcase ${i + 1}`,
           });
         }
       }
-  
+      
+      // console.log("Testcases passed successfully");
       return res
         .status(200)
         .json({ verdict: "Pass", message: `All Example testcases Passed` });
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({ error: error });
+      console.error("Error in running problem:", error);
+      return res.status(500).json({ error: "Internal server error", message: error.message });
     }
   };
   
@@ -73,12 +86,16 @@ const runAProblem = async (req, res) => {
       const { problemId } = req.params;
       const userId = req.session.passport.user._doc._id;
   
-      const testcases = await TestcasesModel.find({
+      const testcases = await testcasesModel.find({
         problem: problemId,
       });
   
       if (!code) {
         return res.status(404).json({ success: false, error: "Empty code !!" });
+      }
+
+      if (!testcases.length) {
+        return res.status(404).json({ success: false, error: "No test cases found!" });
       }
   
       for (let i = 0; i < testcases.length; i++) {
@@ -95,17 +112,17 @@ const runAProblem = async (req, res) => {
           pureStringtestcaseOutput.toLowerCase();
   
         if (!success) {
-          const solution = await SolutionsModel.create({
+          const solution = await solutionsModel.create({
             problem: problemId,
             verdict: "Fail",
-            message: `Wrong Answer on testcase ${i`` + 1}`,
+            message: `Wrong Answer on testcase ${i + 1}`,
             submittedBy: userId,
             submittedAt: new Date(),
           });
           return res.status(200).json({ solution });
         }
       }
-      const solution = await SolutionsModel.create({
+      const solution = await solutionsModel.create({
         problem: problemId,
         verdict: "Pass",
         message: `Accepted`,
@@ -115,7 +132,8 @@ const runAProblem = async (req, res) => {
   
       return res.status(200).json({ solution });
     } catch (error) {
-      return res.status(500).json({ error: error });
+      console.error("Error in running problem:", error);
+      return res.status(500).json({ error: "Internal server error", message: error.message });
     }
   };  
 

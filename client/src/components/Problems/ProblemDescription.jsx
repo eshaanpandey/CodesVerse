@@ -4,6 +4,9 @@ import ExampleArea from "./ExampleArea";
 import ConstraintsArea from "./ConstraintsArea";
 
 function ProblemDescription({ problem }) {
+  if (!problem || Object.keys(problem).length === 0) {
+    return <div>Loading problem description...</div>;
+  }
   return (
     <div className="w-2/5 p-5 overflow-y-auto">
       <div className="flex flex-col w-full">
