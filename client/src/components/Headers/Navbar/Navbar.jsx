@@ -12,9 +12,9 @@ function Navbar() {
     return globalState.userReducer.user.data;
   });
   return (
-    <div className="flex flex-row items-center w-full px-10 py-5 bg-gray-950 h-1/4">
+    <div className="flex flex-row items-center w-full px-10 py-2 bg-gray-950 h-1/4">
       <div className="flex justify-between w-full">
-        <img src={require("../../../images/logo.jpeg")} className="w-72 h-28"/>
+        <img src={require("../../../images/logo.jpeg")} className="w-30 h-20"/>
         <div className="flex items-center justify-center text-white">
           <NavbarElement label="Home" id="home">
             <AiFillHome size={20} className="mr-2" />
