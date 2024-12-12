@@ -17,7 +17,7 @@ function SubmitProblemScreen() {
       dispatch(getProblemById(_id)).then((data) => {
         setProblem(data.payload.data.problem);
       });
-    }, []);
+    }, [_id, dispatch]);
   
     return (
       <div className="w-full h-screen text-black bg-cyan-100">

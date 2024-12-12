@@ -13,7 +13,7 @@ function Problems() {
     dispatch(getProblemsList()).then((data) => {
       setProblems(data.payload.data.problems);
     });
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="flex items-center justify-center w-full p-5 ">
