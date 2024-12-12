@@ -42,7 +42,7 @@ function LoginForm({ setIsLogin }) {
   function onLogin() {
     dispatch(signin(userData)).then((data) => {
       console.log(data);
-      if (data.type == "ERROR") {
+      if (data.type === "ERROR") {
         setErrorMessage(data.payload.response.data.error);
       }
     });

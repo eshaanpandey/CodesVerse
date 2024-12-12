@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { redirect } from "react-router-dom";
+// import { redirect } from "react-router-dom";
 import './App.css';
 import LoginScreen from "./screens/LoginScreen.jsx";
 import HomeScreen from "./screens/HomeScreen.jsx";
@@ -15,7 +15,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getLoggedInUser());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Routes>
