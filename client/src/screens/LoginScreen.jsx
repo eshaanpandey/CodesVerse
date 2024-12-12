@@ -11,7 +11,7 @@ function LoginScreen() {
     return (
       <div
         className="flex flex-col w-full min-h-screen bg-cyan-100"
-        style={{ fontFamily: "cursive"}}
+        // style={{ fontFamily: "cursive"}}
       >
         <div className="flex h-40">
           <LogoHeaderArea />
