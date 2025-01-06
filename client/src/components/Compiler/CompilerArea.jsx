@@ -8,13 +8,15 @@ import { runProgram, submitSolution } from "../../redux/reducers/solutions/solut
 
 import { Triangle } from "react-loader-spinner";
 import classNames from "classnames";
+import { Editor } from "@monaco-editor/react";
+
 
 function CompilerArea({ problemId }) {
-  const [code, setCode] = useState();
-
+  const [code, setCode] = useState(`#include<iostream>\nusing namespace std;\n\nint main(){\n\n    return 0;\n}`);
   const [solution, setSolution] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
-  let [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
 
   function closeModal() {
     setSolution();
@@ -25,28 +27,16 @@ function CompilerArea({ problemId }) {
     setIsOpen(true);
   }
 
-  function changeHandler(e) {
-    setCode(e.target.value);
-  }
-
-  const dispatch = useDispatch();
   function onRun() {
     dispatch(
       runProgram({ problemData: { code: code, language: "cpp" }, problemId })
     ).then((data) => {
-      console.log(data.payload);
       if (!data.payload.data) {
-        if (data.payload.response.data.error.stderr) {
-          setSolution({
-            verdict: "Fail",
-            message: data.payload.response.data.error.stderr.split("error:")[1] || "Unknown error",
-          });
-        } else {
-          setSolution({
-            verdict: "Fail",
-            message: String(data.payload.response.data.error || "Unknown error"),
-          });
-        }
+        setSolution({
+          verdict: "Fail",
+          message:
+            data.payload.response.data.error.stderr.split("error:")[1] || "Unknown error",
+        });
       } else {
         const verdict = data.payload.data.verdict === "Pass" ? "Pass" : "Fail";
         const message = data.payload.data.message || "Solution passed successfully";
@@ -55,7 +45,6 @@ function CompilerArea({ problemId }) {
           message,
         });
       }
-      
     });
     openModal();
   }
@@ -67,22 +56,18 @@ function CompilerArea({ problemId }) {
         problemId,
       })
     ).then((data) => {
-      console.log(data.payload);
       if (!data.payload.data) {
-        if (data.payload.response.data.error.stderr)
-          setSolution({
-            verdict: "Fail",
-            message: data.payload.response.data.error.stderr.split("error:")[1],
-          });
-        else
-          setSolution({
-            verdict: "Fail",
-            message: data.payload.response.data.error,
-          });
-      } else setSolution(data.payload.data.solution);
+        setSolution({
+          verdict: "Fail",
+          message: data.payload.response.data.error.stderr.split("error:")[1],
+        });
+      } else {
+        setSolution(data.payload.data.solution);
+      }
     });
     openModal();
   }
+
   return (
     <>
       <div className="w-3/5 h-full p-5">
@@ -135,16 +120,23 @@ function CompilerArea({ problemId }) {
             </div>
           </Dialog>
         </Transition>
-        <textarea
-          onChange={changeHandler}
-          className="w-full p-3 text-lg text-black rounded-lg shadow-lg resize-none"
-          placeholder="Write your C++ code here !!"
-          style={{ height: "95%" }}
+        <Editor
+          height="75vh"
+          defaultLanguage="cpp"
+          defaultValue={`#include<iostream>
+using namespace std;
+
+int main() {
+    return 0;
+}`}
+          onChange={(value) => setCode(value)}
+          theme="vs-dark"
         />
+
         <div className="flex flex-row justify-end px-4">
           <div className="flex items-center justify-center p-2 text-lg">
             <CustomButton
-              bgColor="#D3D3D3" 
+              bgColor="#D3D3D3"
               textColor="black"
               text={"Run Code"}
               fontSize={"1.125rem"}
@@ -153,7 +145,7 @@ function CompilerArea({ problemId }) {
           </div>
           <div className="flex items-center justify-center p-2 text-lg">
             <CustomButton
-              bgColor="#32CD32" 
+              bgColor="#32CD32"
               textColor="black"
               text={"Submit"}
               fontSize={"1.125rem"}
