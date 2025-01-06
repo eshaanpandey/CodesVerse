@@ -5,7 +5,8 @@ import { SIGN_IN, SIGN_OUT, SIGN_UP } from "./authTypes";
 export const signin = (userData) => async (dispatch) => {
   try {
     const user = await axios({
-      url: "http://localhost:4000/judge/auth/login",
+      // url: "http://localhost:4000/judge/auth/login",
+      url: "https://codesverse.onrender.com/judge/auth/login",
       method: "POST",
       data: userData,
     });
@@ -23,7 +24,7 @@ export const signin = (userData) => async (dispatch) => {
 export const signup = (userData) => async (dispatch) => {
   try {
     const user = await axios({
-      url: "http://localhost:4000/judge/auth/signup",
+      url: "https://codesverse.onrender.com/judge/auth/signup",
       method: "POST",
       data: userData,
     });

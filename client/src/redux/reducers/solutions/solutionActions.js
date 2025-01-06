@@ -7,7 +7,7 @@ const runProgram =
   async (dispatch) => {
     try {
       const solution = await axios({
-        url: `http://localhost:4000/judge/solutions/run/${problemId}`,
+        url: `https://codesverse.onrender.com/judge/solutions/run/${problemId}`,
         method: "POST",
         data: problemData,
       });
@@ -23,7 +23,7 @@ const submitSolution =
   async (dispatch) => {
     try {
       const solution = await axios({
-        url: `http://localhost:4000/judge/solutions/submit/${problemId}`,
+        url: `https://codesverse.onrender.com/judge/solutions/submit/${problemId}`,
         method: "POST",
         data: problemData,
       });

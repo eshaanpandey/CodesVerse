@@ -5,7 +5,7 @@ import { GET_PROBLEMS_LIST, GET_PROBLEM_BY_ID } from "./problemsTypes";
 export const getProblemsList = () => async (dispatch) => {
   try {
     const problems = await axios({
-      url: "http://localhost:4000/judge/problems/viewAllProblems",
+      url: "https://codesverse.onrender.com/judge/problems/viewAllProblems",
       method: "GET",
     });
 
@@ -18,7 +18,7 @@ export const getProblemsList = () => async (dispatch) => {
 export const getProblemById = (_id) => async (dispatch) => {
   try {
     const problem = await axios({
-      url: `http://localhost:4000/judge/problems/viewProblem/${_id}`,
+      url: `https://codesverse.onrender.com/judge/problems/viewProblem/${_id}`,
       method: "GET",
     });
 
