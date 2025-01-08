@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { SIGN_IN, SIGN_OUT, SIGN_UP } from "./authTypes";
 
-export const signin = (userData) => async (dispatch) => {
+export const signin = (userData, navigate) => async (dispatch) => {
   try {
     const user = await axios({
       // url: "http://localhost:4000/judge/auth/login",
@@ -12,8 +12,7 @@ export const signin = (userData) => async (dispatch) => {
     });
 
     localStorage.setItem("judgeUser", JSON.stringify(user.data.token));
-
-    window.location.href = "/home";
+    navigate("/home");
 
     return dispatch({ type: SIGN_IN, payload: user });
   } catch (error) {
@@ -21,7 +20,7 @@ export const signin = (userData) => async (dispatch) => {
   }
 };
 
-export const signup = (userData) => async (dispatch) => {
+export const signup = (userData, navigate) => async (dispatch) => {
   try {
     const user = await axios({
       url: "https://codesverse.onrender.com/judge/auth/signup",
@@ -31,7 +30,7 @@ export const signup = (userData) => async (dispatch) => {
 
     localStorage.setItem("judgeUser", JSON.stringify(user.data.token));
 
-    window.location.href = "/home";
+    navigate("/home");
 
     return dispatch({ type: SIGN_UP, payload: user });
   } catch (error) {
@@ -41,10 +40,11 @@ export const signup = (userData) => async (dispatch) => {
 
 export const signout = () => async (dispatch) => {
   try {
-    localStorage.removeItem("judgeUser");
-
-    return dispatch({ type: SIGN_OUT, payload: {} });
+    localStorage.removeItem("judgeUser"); 
+    dispatch({ type: SIGN_OUT }); 
   } catch (error) {
+    console.log("Error during logout", error); 
     return dispatch({ type: "ERROR", payload: error });
   }
 };
+

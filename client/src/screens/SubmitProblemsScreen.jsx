@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-import LogoHeaderArea from "../components/Headers/LogoHeaderArea";
+// import LogoHeaderArea from "../components/Headers/LogoHeaderArea";
 import ProblemDescription from "../components/Problems/ProblemDescription";
 import CompilerArea from "../components/Compiler/CompilerArea";
 
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getProblemById } from "../redux/reducers/problems/problemsActions";
+import Navbar from "../components/Headers/Navbar/Navbar";
 
 function SubmitProblemScreen() {
     const [problem, setProblem] = useState(null); 
@@ -21,11 +22,12 @@ function SubmitProblemScreen() {
   
     return (
       <div className="w-full h-screen text-black bg-cyan-100">
-        <div className="" style={{ height: "11%" }}>
-          <LogoHeaderArea />
+        <div className="">
+          {/* <LogoHeaderArea /> */}
+          <Navbar/>
         </div>
         <div
-          className="flex flex-row w-full h-5/6"
+          className="flex flex-row w-full h-5/6 p-2"
           style={{ fontFamily: "revert-layer" }}
         >
           <ProblemDescription problem={problem} />

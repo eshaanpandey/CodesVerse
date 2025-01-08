@@ -1,13 +1,13 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { signin } from "../../redux/reducers/auth/authActions";
 import InputWithLabel from "./InputWithLabel";
 import CustomButton from "../CustomButton";
-import { useDispatch } from "react-redux";
-import { signin } from "../../redux/reducers/auth/authActions";
 
 function LoginForm({ setIsLogin }) {
-  function isLoginHandler() {
-    setIsLogin(false);
-  }
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [userData, setUserData] = useState({
     email: "",
@@ -35,13 +35,10 @@ function LoginForm({ setIsLogin }) {
     }
   };
 
-  const dispatch = useDispatch();
-
   const [errorMessage, setErrorMessage] = useState();
 
   function onLogin() {
-    dispatch(signin(userData)).then((data) => {
-      console.log(data);
+    dispatch(signin(userData, navigate)).then((data) => {
       if (data.type === "ERROR") {
         setErrorMessage(data.payload.response.data.error);
       }
@@ -56,21 +53,18 @@ function LoginForm({ setIsLogin }) {
         <InputWithLabel
           type={"text"}
           label={"Enter your Email or Username"}
-          palceholder={"Email or Username"}
+          placeholder={"Email or Username"}
           id={"EmailorUsername"}
           handleChange={handleChange}
         />
         <InputWithLabel
           type={"password"}
           label={"Enter your Password"}
-          palceholder={"Password"}
+          placeholder={"Password"}
           id={"Password"}
           handleChange={handleChange}
         />
-        <div className="flex justify-center w-full mb-4">
-          <h1 className="text-blue-600">Forgot Password ?</h1>
-        </div>
-        {errorMessage && <div className="flex justify-center w-full"><p className="text-red-700">{errorMessage}</p></div>}
+        {errorMessage && <p className="text-red-700">{errorMessage}</p>}
         <CustomButton
           text={"Sign In"}
           bgColor={"black"}
@@ -78,18 +72,15 @@ function LoginForm({ setIsLogin }) {
           onPress={onLogin}
         />
       </div>
-      <div className="flex justify-center w-full">
-        <h1>
-          Don't have an account?
-          <span
-            className="text-blue-900 cursor-pointer"
-            onClick={isLoginHandler}
-          >
-            {" "}
-            Sign Up
-          </span>
-        </h1>
-      </div>
+      <h1>
+        Don't have an account?{" "}
+        <span
+          className="text-blue-900 cursor-pointer"
+          onClick={() => setIsLogin(false)}
+        >
+          Sign Up
+        </span>
+      </h1>
     </div>
   );
 }

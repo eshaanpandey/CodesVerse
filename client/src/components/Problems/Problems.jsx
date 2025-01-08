@@ -16,22 +16,22 @@ function Problems() {
   }, [dispatch]);
 
   return (
-    <div className="flex items-center justify-center w-full p-5 ">
-      <div className="w-1/2 ">
-        <h1 className="text-3xl">Problems:</h1>
+    <div className="flex flex-col items-center justify-center w-full p-5">
+      <div className="w-full sm:w-3/4 lg:w-1/2">
+        <h1 className="text-2xl sm:text-3xl mb-4">Problems:</h1>
         {problems ? (
           problems.map((problem, index) => {
-            return <ProblemBar number={index + 1} {...problem} />;
+            return <ProblemBar key={index} number={index + 1} {...problem} />;
           })
         ) : (
-          <DNA
-            visible={true}
-            height="200"
-            width="200"
-            ariaLabel="dna-loading"
-            wrapperStyle={{}}
-            wrapperClass="dna-wrapper"
-          />
+          <div className="flex justify-center items-center">
+            <DNA
+              visible={true}
+              height="100"
+              width="100"
+              ariaLabel="dna-loading"
+            />
+          </div>
         )}
       </div>
     </div>

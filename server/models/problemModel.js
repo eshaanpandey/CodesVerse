@@ -1,11 +1,5 @@
 import mongoose from "mongoose";
 
-// const exampleSchema = mongoose.Schema({
-//     input: String,
-//     output: String,
-//     explanation: String
-// });
-
 const problemSchema = mongoose.Schema({
     heading: {type: String},
     statement: {type: String},

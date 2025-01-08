@@ -1,38 +1,137 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import NavbarElement from "./NavbarElement";
 import { AiFillHome } from "react-icons/ai";
 import { TbListCheck } from "react-icons/tb";
-import { GiTrophyCup } from "react-icons/gi";
-import { FaUserSecret } from "react-icons/fa";
-import {IoMdLogIn} from 'react-icons/io'
-import { useSelector } from "react-redux";
+import { IoMdLogIn, IoMdLogOut } from "react-icons/io";
+import { FaUserCircle } from "react-icons/fa";
+import { HiOutlineMenu, HiX } from "react-icons/hi"; // Hamburger and Close icons
+import { Link, useLocation } from "react-router-dom"; // For navigation
+import { useSelector, useDispatch } from "react-redux";
+import { signout } from "../../../redux/reducers/auth/authActions";
 
 function Navbar() {
-  const isLoggenIn = useSelector((globalState) => {
-    return globalState.userReducer.user.data;
-  });
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+  const isAuthenticated = useSelector((state) => state.authReducer.isAuthenticated);
+  const dispatch = useDispatch();
+  const location = useLocation(); // To determine active route
+
+  const handleLogout = () => {
+    dispatch(signout());
+  };
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <div className="flex flex-row items-center w-full px-10 py-4 bg-gray-950 h-1/4">
-      <div className="flex justify-between w-full">
-        <img src={require("../../../images/CodesVerse.jpg")} className="w-30 h-24" alt="Logo"/>
-        <div className="flex items-center justify-center text-white">
-          <NavbarElement label="Home" id="home">
-            <AiFillHome size={20} className="mr-2" />
+    <div className="flex items-center w-full px-4 py-4 bg-gray-950 h-20 justify-between">
+      {/* Logo */}
+      <Link to="/problems" className="flex-shrink-0">
+        <img
+          src={require("../../../images/CodesVerse.jpg")}
+          className="w-24 h-12"
+          alt="Logo"
+        />
+      </Link>
+
+      {/* Desktop Navigation */}
+      <div className="hidden lg:flex items-center justify-between flex-grow text-white">
+        {/* Center Navigation */}
+        <div className="flex justify-center space-x-16 flex-grow">
+          <NavbarElement label="Home" id="home" active={location.pathname === "/"}>
+            <AiFillHome size={24} />
           </NavbarElement>
-          <NavbarElement label="Problems" id="problems">
-            <TbListCheck size={20} className="mr-2" />
+          <NavbarElement label="Problems" id="problems" active={location.pathname === "/problems"}>
+            <TbListCheck size={24} />
           </NavbarElement>
-          <NavbarElement label="Contests" id="contests">
-            <GiTrophyCup size={20} className="mr-2" />
+          <NavbarElement label="Profile" id="profile" active={location.pathname === "/profile"}>
+            <FaUserCircle size={24} />
           </NavbarElement>
-          {!isLoggenIn ? (
+        </div>
+
+        {/* Login/Logout */}
+        <div className="flex items-center space-x-4">
+          {!isAuthenticated ? (
             <NavbarElement label="Log In" id="login">
-              <IoMdLogIn size={20} className="mr-2" />
+              <IoMdLogIn size={24} />
             </NavbarElement>
           ) : (
-            <NavbarElement label="Profile" id="profile">
-              <FaUserSecret size={20} className="mr-2" />
+            <div
+              onClick={handleLogout}
+              className="flex items-center space-x-2 cursor-pointer text-white hover:text-gray-400"
+            >
+              <IoMdLogOut size={24} />
+              <span>Log Out</span>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Hamburger Menu for Mobile */}
+      <div className="lg:hidden flex items-center">
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="text-white"
+        >
+          {isMenuOpen ? <HiX size={30} /> : <HiOutlineMenu size={30} />}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      <div
+        ref={menuRef}
+        className={`lg:hidden fixed top-20 right-0 h-2/4 w-2/5 bg-gray-800 text-white shadow-lg p-4 transform transition-transform z-50 duration-500 ${
+          isMenuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex flex-col items-center justify-center space-y-6 h-full">
+          <NavbarElement
+            label="Home"
+            id="home"
+            active={location.pathname === "/"}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <AiFillHome size={24} />
+          </NavbarElement>
+          <NavbarElement
+            label="Problems"
+            id="problems"
+            active={location.pathname === "/problems"}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <TbListCheck size={24} />
+          </NavbarElement>
+          <NavbarElement
+            label="Profile"
+            id="profile"
+            active={location.pathname === "/profile"}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <FaUserCircle size={24} />
+          </NavbarElement>
+          {!isAuthenticated ? (
+            <NavbarElement label="Log In" id="login" onClick={() => setIsMenuOpen(false)}>
+              <IoMdLogIn size={24} />
             </NavbarElement>
+          ) : (
+            <div
+              onClick={() => {
+                handleLogout();
+                setIsMenuOpen(false);
+              }}
+              className="flex items-center space-x-2 cursor-pointer text-white hover:text-gray-400"
+            >
+              <IoMdLogOut size={24} />
+              <span>Log Out</span>
+            </div>
           )}
         </div>
       </div>

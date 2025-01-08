@@ -1,25 +1,32 @@
 import { SIGN_IN, SIGN_UP, SIGN_OUT } from "./authTypes";
 
-const initialState = {};
+const initialState = {
+  isAuthenticated: !!localStorage.getItem("judgeUser"), 
+  user: JSON.parse(localStorage.getItem("judgeUser")) || null, 
+};
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case SIGN_IN:
       return {
         ...state,
-        ...action.payload,
+        isAuthenticated: true, 
+        user: action.payload.data,
       };
     case SIGN_UP:
       return {
         ...state,
-        ...action.payload,
+        isAuthenticated: true, 
+        user: action.payload.data,
       };
     case SIGN_OUT:
-      return {};
-    default:
       return {
         ...state,
+        isAuthenticated: false, 
+        user: null, 
       };
+    default:
+      return state;
   }
 };
 
