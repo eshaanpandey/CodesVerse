@@ -48,7 +48,7 @@ function Navbar() {
         darkMode ? "bg-gray-950 text-white" : "bg-gray-800 text-black"
       }`}
     >
-      <Link to="/problems" className="flex-shrink-0">
+      <Link to="/" className="flex-shrink-0">
         <img
           src={require("../../../images/CodesVerse.jpg")}
           className="w-24 h-12"
