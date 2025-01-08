@@ -1,10 +1,17 @@
 import React from "react";
 
-function CustomButton({ text, bgColor, textColor, onPress, fontSize, hoverBgColor }) {
+function CustomButton({
+  text,
+  bgColor,
+  textColor,
+  onPress,
+  fontSize,
+  hoverBgColor,
+}) {
   return (
     <button
       onClick={onPress}
-      className={`w-full rounded-lg flex justify-center p-2 transition duration-300`}
+      className="w-full rounded-lg p-4 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
       style={{
         backgroundColor: bgColor,
         color: textColor,

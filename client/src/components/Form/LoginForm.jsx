@@ -46,14 +46,14 @@ function LoginForm({ setIsLogin }) {
   }
 
   return (
-    <div className="">
-      <h1 className="text-2xl">Sign In</h1>
-      <p>Sign in to your account</p>
-      <div className="flex flex-col items-start w-full p-5 my-5 bg-white rounded-lg shadow-2xl">
+    <div className="flex flex-col items-center w-full ">
+      <h1 className="text-3xl font-bold mb-4 text-center">Sign In</h1>
+      <p className="mb-4 text-center">Sign in to your account</p>
+      <div className="flex flex-col items-start w-full max-w-md">
         <InputWithLabel
           type={"text"}
-          label={"Enter your Email or Username"}
-          placeholder={"Email or Username"}
+          label={"Enter your Email"}
+          placeholder={"Email"}
           id={"EmailorUsername"}
           handleChange={handleChange}
         />
@@ -64,7 +64,9 @@ function LoginForm({ setIsLogin }) {
           id={"Password"}
           handleChange={handleChange}
         />
-        {errorMessage && <p className="text-red-700">{errorMessage}</p>}
+        {errorMessage && (
+          <p className="text-red-700 text-center mt-2">{errorMessage}</p>
+        )}
         <CustomButton
           text={"Sign In"}
           bgColor={"black"}
@@ -72,10 +74,10 @@ function LoginForm({ setIsLogin }) {
           onPress={onLogin}
         />
       </div>
-      <h1>
+      <h1 className="text-center mt-4">
         Don't have an account?{" "}
         <span
-          className="text-blue-900 cursor-pointer"
+          className="text-blue-900 dark:text-blue-300 cursor-pointer"
           onClick={() => setIsLogin(false)}
         >
           Sign Up

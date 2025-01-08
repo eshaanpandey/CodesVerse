@@ -25,10 +25,10 @@ function SignupForm({ setIsLogin }) {
   }
 
   return (
-    <div className="">
-      <h1 className="text-2xl">Sign Up</h1>
-      <p>Enter your details.</p>
-      <div className="flex flex-col items-start w-full p-5 my-5 bg-white rounded-lg shadow-2xl">
+    <div className="flex flex-col">
+      <h1 className="text-3xl font-bold mb-4 text-center">Sign Up</h1>
+      <p className="mb-4 text-center">Enter your details.</p>
+      <div className="flex flex-col items-start w-full">
         <InputWithLabel
           type={"text"}
           label={"Enter your Name"}
@@ -37,7 +37,7 @@ function SignupForm({ setIsLogin }) {
           id={"name"}
         />
         <InputWithLabel
-          type={"text"}
+          type={"email"}
           label={"Enter your Email"}
           placeholder={"Email"}
           handleChange={handleChange}
@@ -57,7 +57,7 @@ function SignupForm({ setIsLogin }) {
           handleChange={handleChange}
           id={"password"}
         />
-        {errorMessage && <p className="text-red-700">{errorMessage}</p>}
+        {errorMessage && <p className="text-red-700 text-center">{errorMessage}</p>}
         <CustomButton
           onPress={onSignUp}
           text={"Sign Up"}
@@ -65,10 +65,10 @@ function SignupForm({ setIsLogin }) {
           textColor="white"
         />
       </div>
-      <h1>
+      <h1 className="text-center mt-4">
         Already have an account?{" "}
         <span
-          className="text-blue-900 cursor-pointer"
+          className="text-blue-900 dark:text-blue-300 cursor-pointer"
           onClick={() => setIsLogin(true)}
         >
           Sign In

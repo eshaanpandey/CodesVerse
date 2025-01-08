@@ -5,7 +5,7 @@ import { GET_LOGGEDIN_USER } from "./userTypes";
 export const getLoggedInUser = () => async (dispatch) => {
   try {
     const user = await axios({
-      url: "http://localhost:4000/judge/user",
+      url: "https://codesverse.onrender.com/judge/user",
       method: "GET",
     });
 
