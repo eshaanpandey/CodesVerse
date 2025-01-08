@@ -137,9 +137,7 @@ function Home() {
         <div className="space-y-4">
           <p className="text-lg text-gray-300 max-w-3xl">
             This platform is created by <strong>Eshaan Pandey</strong>, a passionate
-            programmer from the Indian Institute of Information Technology, Pune. Eshaan
-            is dedicated to creating platforms that help others grow their coding skills
-            and reach their full potential.
+            programmer from the Indian Institute of Information Technology, Pune.
           </p>
 
           <div>
