@@ -12,9 +12,9 @@ function ProblemDescription({ problem }) {
     );
   }
   return (
-    <div className="w-full lg:w-2/5 p-5 overflow-y-auto bg-white rounded-lg shadow-md mt-5 lg:mt-4 lg:ml-1 h-auto lg:h-full">
+    <div className="w-full lg:w-2/5 p-5 overflow-y-auto bg-white dark:bg-gray-900 rounded-lg shadow-md mt-5 lg:mt-4 lg:ml-1 h-[85vh]">
       <div className="flex flex-col w-full">
-        <h1 className="text-3xl font-bold text-gray-800">{problem.heading}</h1>
+        <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-200">{problem.heading}</h1>
         <div
           className={classNames(
             "text-lg font-semibold text-center mt-2 py-1 px-3 rounded-lg",
@@ -28,7 +28,7 @@ function ProblemDescription({ problem }) {
           {problem.difficulty}
         </div>
         <div className="h-px my-4 bg-gray-400"></div>
-        <div className="text-lg text-gray-700">
+        <div className="text-lg text-gray-700 dark:text-gray-300">
           <p className="mb-4">{problem.statement}</p>
           {problem.examples &&
             problem.examples.map((example, index) => {

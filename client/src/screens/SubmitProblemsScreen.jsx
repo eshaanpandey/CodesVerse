@@ -21,7 +21,7 @@ function SubmitProblemScreen() {
     }, [_id, dispatch]);
   
     return (
-      <div className="w-full h-full text-black bg-cyan-100">
+      <div className="w-full h-full text-black dark:text-white bg-cyan-100 dark:bg-gray-800">
         <div className="">
           {/* <LogoHeaderArea /> */}
           <Navbar/>

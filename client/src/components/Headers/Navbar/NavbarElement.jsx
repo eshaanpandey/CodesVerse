@@ -9,14 +9,20 @@ function NavbarElement({ label, children, id }) {
     <Link
       to={`/${id}`}
       className={classnames(
-        "cursor-pointer mx-16 p-2 flex flex-row justify-center items-center hover:border-b-2",
-        {
-          "border-b-2": type === id,
-        }
+        "relative mx-4 px-2 py-1 flex flex-row items-center space-x-2 group",
+        "hover:text-blue-500 text-base"
       )}
     >
       {children}
-      <h1 className="text-xl hidden sm:block">{label}</h1>
+      <h1 className="hidden sm:block">{label}</h1>
+      <span
+        className={classnames(
+          "absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 transform scale-x-0 group-hover:scale-x-100",
+          {
+            "scale-x-100": type === id,
+          }
+        )}
+      ></span>
     </Link>
   );
 }
