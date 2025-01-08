@@ -4,8 +4,8 @@ import { AiFillHome } from "react-icons/ai";
 import { TbListCheck } from "react-icons/tb";
 import { IoMdLogIn, IoMdLogOut } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
-import { HiOutlineMenu, HiX } from "react-icons/hi"; // Hamburger and Close icons
-import { Link, useLocation } from "react-router-dom"; // For navigation
+import { HiOutlineMenu, HiX } from "react-icons/hi";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { signout } from "../../../redux/reducers/auth/authActions";
 
@@ -14,7 +14,7 @@ function Navbar() {
   const menuRef = useRef(null);
   const isAuthenticated = useSelector((state) => state.authReducer.isAuthenticated);
   const dispatch = useDispatch();
-  const location = useLocation(); // To determine active route
+  const location = useLocation();
 
   const handleLogout = () => {
     dispatch(signout());
