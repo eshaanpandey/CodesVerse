@@ -3,10 +3,12 @@
 @tailwind utilities;
 body {
   margin: 0;
-  font-family: 'cursive';
+  font-family: "DM Sans", serif;
+  font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 
 /* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
