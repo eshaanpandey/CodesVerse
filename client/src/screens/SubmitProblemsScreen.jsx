@@ -21,13 +21,13 @@ function SubmitProblemScreen() {
     }, [_id, dispatch]);
   
     return (
-      <div className="w-full h-screen text-black bg-cyan-100">
+      <div className="w-full h-full text-black bg-cyan-100">
         <div className="">
           {/* <LogoHeaderArea /> */}
           <Navbar/>
         </div>
         <div
-          className="flex flex-row w-full h-5/6 p-2"
+          className="flex flex-col lg:flex-row w-full h-auto lg:h-5/6 p-2 gap-2"
           style={{ fontFamily: "revert-layer" }}
         >
           <ProblemDescription problem={problem} />

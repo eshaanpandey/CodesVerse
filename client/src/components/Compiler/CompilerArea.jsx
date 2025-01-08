@@ -44,7 +44,8 @@ function CompilerArea({ problemId }) {
         const error = data.payload.response?.data?.error;
         setSolution({
           verdict: "Fail",
-          message: error?.stderr?.split("error:")[1] || error || "Unknown error",
+          message:
+            error?.stderr?.split("error:")[1] || error || "Unknown error",
         });
       } else {
         const verdict = data.payload.data.verdict === "Pass" ? "Pass" : "Fail";
@@ -70,10 +71,12 @@ function CompilerArea({ problemId }) {
         const error = data.payload.response?.data?.error;
         setSolution({
           verdict: "Fail",
-          message: error?.stderr?.split("error:")[1] || error || "Unknown error",
+          message:
+            error?.stderr?.split("error:")[1] || error || "Unknown error",
         });
       } else {
-        const verdict = data.payload.data.solution.verdict === "Pass" ? "Pass" : "Fail";
+        const verdict =
+          data.payload.data.solution.verdict === "Pass" ? "Pass" : "Fail";
         const message =
           data.payload.data.solution.message || "Solution passed successfully";
         setSolution({
@@ -82,7 +85,7 @@ function CompilerArea({ problemId }) {
         });
 
         if (verdict === "Pass") {
-          setShowConfetti(true); 
+          setShowConfetti(true);
           setTimeout(() => setShowConfetti(false), 5000);
         }
       }
@@ -105,7 +108,7 @@ function CompilerArea({ problemId }) {
   return (
     <>
       {showConfetti && <Confetti width={width} height={height} />}
-      <div className="w-3/5 h-full p-5">
+      <div className="w-full lg:w-3/5 h-full py-4">
         <Transition appear show={isOpen} as={Fragment}>
           <Dialog as="div" className="relative z-10" onClose={closeModal}>
             <Transition.Child
@@ -190,6 +193,7 @@ function CompilerArea({ problemId }) {
           theme="vs-dark"
           options={{
             fontSize: 15,
+            automaticLayout: "true",
           }}
         />
 

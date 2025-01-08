@@ -12,7 +12,7 @@ function ProblemDescription({ problem }) {
     );
   }
   return (
-    <div className="w-2/5 p-5 overflow-y-auto bg-white rounded-lg shadow-md mt-5 ml-1 h-full">
+    <div className="w-full lg:w-2/5 p-5 overflow-y-auto bg-white rounded-lg shadow-md mt-5 lg:mt-4 lg:ml-1 h-auto lg:h-full">
       <div className="flex flex-col w-full">
         <h1 className="text-3xl font-bold text-gray-800">{problem.heading}</h1>
         <div
