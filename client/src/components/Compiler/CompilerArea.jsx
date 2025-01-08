@@ -1,19 +1,17 @@
 import React, { useState, Fragment, useEffect, useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Dialog, Transition } from "@headlessui/react";
-
 import CustomButton from "../CustomButton";
 import Confetti from "react-confetti";
-
 import {
   runProgram,
   submitSolution,
 } from "../../redux/reducers/solutions/solutionActions";
-
 import { Hourglass } from "react-loader-spinner";
 import classNames from "classnames";
 import { Editor } from "@monaco-editor/react";
 import { useWindowSize } from "react-use";
+import { useNavigate } from "react-router-dom"; // Change to useNavigate
 
 function CompilerArea({ problemId }) {
   const [code, setCode] = useState(
@@ -25,6 +23,10 @@ function CompilerArea({ problemId }) {
 
   const dispatch = useDispatch();
   const { width, height } = useWindowSize();
+  const isLoggedIn = useSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
+  const navigate = useNavigate(); // Use useNavigate for navigation
 
   function closeModal() {
     setSolution();
@@ -37,6 +39,16 @@ function CompilerArea({ problemId }) {
   }
 
   const onRun = useCallback(() => {
+    if (!isLoggedIn) {
+      setSolution({
+        verdict: "Login Required",
+        message: "You need to log in to run the code.",
+        isLoginPrompt: true,
+      });
+      openModal();
+      return;
+    }
+
     dispatch(
       runProgram({ problemData: { code: code, language: "cpp" }, problemId })
     ).then((data) => {
@@ -58,9 +70,19 @@ function CompilerArea({ problemId }) {
       }
     });
     openModal();
-  }, [code, dispatch, problemId]);
+  }, [code, dispatch, problemId, isLoggedIn]);
 
   const onSubmit = useCallback(() => {
+    if (!isLoggedIn) {
+      setSolution({
+        verdict: "Login Required",
+        message: "You need to log in to submit the code.",
+        isLoginPrompt: true,
+      });
+      openModal();
+      return;
+    }
+
     dispatch(
       submitSolution({
         problemData: { code: code, language: "cpp" },
@@ -91,7 +113,7 @@ function CompilerArea({ problemId }) {
       }
     });
     openModal();
-  }, [code, dispatch, problemId]);
+  }, [code, dispatch, problemId, isLoggedIn]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -138,29 +160,41 @@ function CompilerArea({ problemId }) {
                     <div className="flex flex-col items-center justify-center w-full h-full space-y-4 text-center">
                       {solution ? (
                         <>
-                          <h1 className="text-2xl font-semibold text-gray-800">
-                            Your Submission
-                          </h1>
-                          <div className="w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full"></div>
-                          <div
-                            className={classNames("text-lg font-medium", {
-                              "text-green-600": solution.verdict === "Pass",
-                              "text-red-600": solution.verdict === "Fail",
-                            })}
-                          >
-                            <p className="mb-2">
-                              Verdict:{" "}
-                              <span className="font-bold">
-                                {solution.verdict || "Unknown"}
-                              </span>
-                            </p>
-                            <p>
-                              Status:{" "}
-                              <span className="font-light">
-                                {solution.message || "No status available"}
-                              </span>
-                            </p>
-                          </div>
+                          {solution.isLoginPrompt ? (
+                            <div className="text-lg font-medium text-red-600">
+                              <p className="mb-2">{solution.message}</p>
+                              <CustomButton
+                                text="Login / Sign Up"
+                                onPress={() => navigate("/login")}
+                              />
+                            </div>
+                          ) : (
+                            <>
+                              <h1 className="text-2xl font-semibold text-gray-800">
+                                Your Submission
+                              </h1>
+                              <div className="w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full"></div>
+                              <div
+                                className={classNames("text-lg font-medium", {
+                                  "text-green-600": solution.verdict === "Pass",
+                                  "text-red-600": solution.verdict === "Fail",
+                                })}
+                              >
+                                <p className="mb-2">
+                                  Verdict:{" "}
+                                  <span className="font-bold">
+                                    {solution.verdict || "Unknown"}
+                                  </span>
+                                </p>
+                                <p>
+                                  Status:{" "}
+                                  <span className="font-light">
+                                    {solution.message || "No status available"}
+                                  </span>
+                                </p>
+                              </div>
+                            </>
+                          )}
                         </>
                       ) : (
                         <div className="flex flex-col items-center">
@@ -208,7 +242,7 @@ function CompilerArea({ problemId }) {
               onPress={onRun}
             />
             <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100">
-              {navigator.platform.includes("Mac") ? "Cmd+'" : "Ctrl+'"}
+              {navigator.platform.includes("Mac") ? "Cmd+'" : "Ctrl+'" }
             </div>
           </div>
           <div className="relative group">
