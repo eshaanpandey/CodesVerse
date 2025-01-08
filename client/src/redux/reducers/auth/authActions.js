@@ -12,7 +12,7 @@ export const signin = (userData, navigate) => async (dispatch) => {
     });
 
     localStorage.setItem("judgeUser", JSON.stringify(user.data.token));
-    navigate("/problems");
+    navigate("/");
 
     return dispatch({ type: SIGN_IN, payload: user });
   } catch (error) {
@@ -30,7 +30,7 @@ export const signup = (userData, navigate) => async (dispatch) => {
 
     localStorage.setItem("judgeUser", JSON.stringify(user.data.token));
 
-    navigate("/problems");
+    navigate("/");
 
     return dispatch({ type: SIGN_UP, payload: user });
   } catch (error) {
