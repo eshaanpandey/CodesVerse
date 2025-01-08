@@ -12,7 +12,11 @@ function HomeScreen() {
     else if (type === "contests") Component = <Contests />;
     else if (type === "profile") Component = <Profile />;
 
-    return <div className="w-full h-3/4 ">{Component}</div>;
+    return (
+        <div className="w-full h-3/4">
+            {Component}
+        </div>
+    );
 }
 
 export default HomeScreen;
