@@ -11,7 +11,7 @@ import { Hourglass } from "react-loader-spinner";
 import classNames from "classnames";
 import { Editor } from "@monaco-editor/react";
 import { useWindowSize } from "react-use";
-import { useNavigate } from "react-router-dom"; // Change to useNavigate
+import { useNavigate } from "react-router-dom";
 
 function CompilerArea({ problemId }) {
   const [code, setCode] = useState(
@@ -26,7 +26,7 @@ function CompilerArea({ problemId }) {
   const isLoggedIn = useSelector(
     (state) => state.authReducer.isAuthenticated
   );
-  const navigate = useNavigate(); // Use useNavigate for navigation
+  const navigate = useNavigate();
 
   function closeModal() {
     setSolution();
@@ -100,7 +100,7 @@ function CompilerArea({ problemId }) {
         const verdict =
           data.payload.data.solution.verdict === "Pass" ? "Pass" : "Fail";
         const message =
-          data.payload.data.solution.message || "Solution passed successfully";
+          data.payload.data.solution.message || "Solution failed!";
         setSolution({
           verdict,
           message,

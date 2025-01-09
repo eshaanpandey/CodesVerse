@@ -38,9 +38,13 @@ function Problems() {
             </motion.div>
           ))
         ) : (
-          <div className="flex justify-center items-center">
+          <div className="flex flex-col justify-center items-center space-y-4">
             <DNA visible={true} height="100" width="100" ariaLabel="dna-loading" />
+            <p className="text-center text-black dark:text-white">
+              Please wait, Problems loading...
+            </p>
           </div>
+
         )}
       </div>
     </div>
