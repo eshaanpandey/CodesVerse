@@ -129,7 +129,9 @@ function Navbar() {
       {/* Mobile Menu */}
       <div
         ref={menuRef}
-        className={`lg:hidden fixed top-20 right-0 h-2/4 w-2/5 ${darkMode ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-800"} shadow-lg p-4 transform transition-transform z-50 duration-500 ${
+        className={`lg:hidden fixed top-20 right-0 h-2/4 w-2/5 ${
+          darkMode ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-800"
+        } shadow-lg p-4 transform transition-transform z-50 duration-500 ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >

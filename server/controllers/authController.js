@@ -13,7 +13,7 @@ const login = async(req, res) => {
         console.log(error);
         return res.status(500).json({error: error.message});
     }
-};
+}; 
 
 const signup = async(req, res) => {
     try {
