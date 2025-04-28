@@ -2,10 +2,12 @@ import axios from "axios";
 
 import { GET_PROBLEMS_LIST, GET_PROBLEM_BY_ID } from "./problemsTypes";
 
+const BaseUrl = process.env.REACT_APP_BASE_URL;
+
 export const getProblemsList = () => async (dispatch) => {
   try {
     const problems = await axios({
-      url: "https://codesverse.onrender.com/judge/problems/viewAllProblems",
+      url: `${BaseUrl}/problems/viewAllProblems`,
       method: "GET",
     });
 
@@ -18,7 +20,7 @@ export const getProblemsList = () => async (dispatch) => {
 export const getProblemById = (_id) => async (dispatch) => {
   try {
     const problem = await axios({
-      url: `https://codesverse.onrender.com/judge/problems/viewProblem/${_id}`,
+      url: `${BaseUrl}/problems/viewProblem/${_id}`,
       method: "GET",
     });
 

@@ -2,12 +2,14 @@ import axios from "axios";
 
 import { RUN_A_PROGRAM, SUBMIT_A_SOLUTION } from "./solutionTypes";
 
+const BaseUrl = process.env.REACT_APP_BASE_URL;
+
 const runProgram =
   ({ problemData, problemId }) =>
   async (dispatch) => {
     try {
       const solution = await axios({
-        url: `https://codesverse.onrender.com/judge/solutions/run/${problemId}`,
+        url: `${BaseUrl}/solutions/run/${problemId}`,
         method: "POST",
         data: problemData,
       });
@@ -23,7 +25,7 @@ const submitSolution =
   async (dispatch) => {
     try {
       const solution = await axios({
-        url: `https://codesverse.onrender.com/judge/solutions/submit/${problemId}`,
+        url: `${BaseUrl}/solutions/submit/${problemId}`,
         method: "POST",
         data: problemData,
       });
@@ -34,7 +36,4 @@ const submitSolution =
     }
   };
 
-export { 
-  runProgram, 
-  submitSolution 
-};
+export { runProgram, submitSolution };
