@@ -2,10 +2,12 @@ import axios from "axios";
 
 import { GET_LOGGEDIN_USER } from "./userTypes";
 
+const BaseUrl = process.env.REACT_APP_BASE_URL;
+
 export const getLoggedInUser = () => async (dispatch) => {
   try {
     const user = await axios({
-      url: "https://codesverse.onrender.com/judge/user",
+      url: `${BaseUrl}/user`,
       method: "GET",
     });
 
