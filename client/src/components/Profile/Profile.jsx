@@ -9,9 +9,7 @@ import { useNavigate, Link } from "react-router-dom";
 export default function Profile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user, solvedProblems, error } = useSelector(
-    (state) => state.userReducer
-  );
+  const { user, solvedProblems } = useSelector((state) => state.userReducer);
 
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
