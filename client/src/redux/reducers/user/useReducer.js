@@ -1,17 +1,21 @@
 import { GET_LOGGEDIN_USER } from "./userTypes";
 
-const initialState = { user: {} };
+const initialState = {
+  user: null,
+  solvedProblems: [],
+  error: null,
+};
 
-const userReducer = (state = initialState, action) => {
+export default function userReducer(state = initialState, action) {
   switch (action.type) {
     case GET_LOGGEDIN_USER:
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.user,
+        solvedProblems: action.payload.solvedProblems,
+        error: null,
       };
     default:
-      return { ...state };
+      return state;
   }
-};
-
-export default userReducer;
+}

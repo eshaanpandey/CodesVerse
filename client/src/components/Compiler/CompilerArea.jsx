@@ -12,6 +12,7 @@ import classNames from "classnames";
 import { Editor } from "@monaco-editor/react";
 import { useWindowSize } from "react-use";
 import { useNavigate } from "react-router-dom";
+import { getLoggedInUser } from "../../redux/reducers/user/userActions";
 
 function CompilerArea({ problemId }) {
   const [code, setCode] = useState(
@@ -95,7 +96,6 @@ function CompilerArea({ problemId }) {
             error?.stderr?.split("error:")[1] || error || "Unknown error",
         });
       } else {
-        console.log("Payload in solutions", data.payload.data);
         const verdict =
           data.payload.data.solution.verdict === "Pass" ? "Pass" : "Fail";
         const message =
@@ -109,6 +109,7 @@ function CompilerArea({ problemId }) {
         });
 
         if (verdict === "Pass") {
+          dispatch(getLoggedInUser());
           setShowConfetti(true);
           setTimeout(() => setShowConfetti(false), 5000);
         }
