@@ -1,4 +1,4 @@
-import { GET_LOGGEDIN_USER } from "./userTypes";
+import { GET_LOGGEDIN_USER, GET_LOGGEDIN_USER_ERROR } from "./userTypes";
 
 const initialState = {
   user: null,
@@ -15,6 +15,14 @@ export default function userReducer(state = initialState, action) {
         solvedProblems: action.payload.solvedProblems,
         error: null,
       };
+    case GET_LOGGEDIN_USER_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+        user: null,
+        solvedProblems: [],
+      };
+
     default:
       return state;
   }

@@ -30,8 +30,31 @@ export default function Profile() {
     setCurrentSolution(null);
   };
 
-  if (error) return <p className="text-red-500">Error: {error}</p>;
-  if (!user) return <p>Loading…</p>;
+  // While loading initial profile data
+  if (user === undefined) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 p-8">
+        <p className="text-gray-700 dark:text-gray-300">Loading profile…</p>
+      </div>
+    );
+  }
+
+  //If user is logged out
+  if (user === null) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 p-8">
+        <p className="mb-4 text-xl text-gray-700 dark:text-gray-300">
+          You need to log in to view your profile.
+        </p>
+        <button
+          onClick={() => navigate("/login")}
+          className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg"
+        >
+          Go to Login
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-8">

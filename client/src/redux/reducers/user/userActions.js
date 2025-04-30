@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_LOGGEDIN_USER } from "./userTypes";
+import { GET_LOGGEDIN_USER, GET_LOGGEDIN_USER_ERROR } from "./userTypes";
 
 const BaseUrl = process.env.REACT_APP_BASE_URL;
 
@@ -16,6 +16,7 @@ export const getLoggedInUser = () => async (dispatch) => {
     });
   } catch (error) {
     return dispatch({
+      type: GET_LOGGEDIN_USER_ERROR,
       payload: error.response?.data || error.message,
     });
   }
