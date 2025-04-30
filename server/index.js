@@ -42,12 +42,12 @@ passport.deserializeUser(function (user, done) {
   done(null, user);
 });
 
-app.use('/judge', router);
+app.use("/judge", router);
 
 app.listen(process.env.PORT, () => {
   db()
     .then(() => {
-      console.log("Server is Running!!!");
+      console.log("Server running on port:", process.env.PORT);
     })
     .catch((error) => {
       console.log("Server connection failed");
