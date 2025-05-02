@@ -20,7 +20,14 @@ routeConfig(passport);
 
 const app = express();
 app.use(cors());
-app.use(helmet());
+
+app.use(
+  helmet({
+    crossOriginOpenerPolicy: false,
+    crossOriginEmbedderPolicy: false,
+  })
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(

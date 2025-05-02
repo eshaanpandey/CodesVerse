@@ -8,6 +8,7 @@ const userSchema = mongoose.Schema(
     username: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, require: true },
+    googleId: { type: String },
     solvedProblems: [{ type: mongoose.Schema.Types.ObjectId, ref: "Problem" }],
     // problemsSolved: {type: Integer},
     // role: {
@@ -24,7 +25,7 @@ const userSchema = mongoose.Schema(
 );
 
 userSchema.methods.generateJwtToken = function () {
-  return jwt.sign({ user: this._id.toString() }, "judge");
+  return jwt.sign({ user: this._id.toString() }, process.env.JWT_SECRET);
   // "judge" me kuch bhi secret key bheji
   // "this._id" me primary key aa jayegi taaki same token 2 users ko na mile
 };

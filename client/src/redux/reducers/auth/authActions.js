@@ -12,7 +12,10 @@ export const signin = (userData, navigate) => async (dispatch) => {
       data: userData,
     });
 
-    localStorage.setItem("judgeUser", JSON.stringify(user.data.token));
+    localStorage.setItem(
+      "judgeUser",
+      JSON.stringify({ token: user.data.token })
+    );
     navigate("/");
 
     return dispatch({ type: SIGN_IN, payload: user });
@@ -29,7 +32,10 @@ export const signup = (userData, navigate) => async (dispatch) => {
       data: userData,
     });
 
-    localStorage.setItem("judgeUser", JSON.stringify(user.data.token));
+    localStorage.setItem(
+      "judgeUser",
+      JSON.stringify({ token: user.data.token })
+    );
 
     navigate("/");
 

@@ -1,13 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { signin } from "../../redux/reducers/auth/authActions";
 import InputWithLabel from "./InputWithLabel";
 import CustomButton from "../CustomButton";
+import { GoogleLogin } from "@react-oauth/google";
+import axios from "axios";
+import { SIGN_IN } from "../../redux/reducers/auth/authTypes";
+
+const BaseUrl = process.env.REACT_APP_BASE_URL;
 
 function LoginForm({ setIsLogin }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);
+  const token = params.get("token");
+
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem("judgeUser", JSON.stringify({ token }));
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      dispatch({ type: SIGN_IN, payload: { data: { token } } });
+      navigate("/");
+    }
+  }, [token, navigate, dispatch]);
 
   const [userData, setUserData] = useState({
     email: "",
@@ -45,6 +63,11 @@ function LoginForm({ setIsLogin }) {
     });
   }
 
+  const handleGoogleSuccess = () => {
+    console.log("google client id: ", process.env.REACT_APP_GOOGLE_CLIENT_ID);
+    window.location.href = `${BaseUrl}/auth/google`;
+  };
+
   return (
     <div className="flex flex-col items-center w-full ">
       <h1 className="text-3xl font-bold mb-4 text-center">Sign In</h1>
@@ -74,6 +97,13 @@ function LoginForm({ setIsLogin }) {
           onPress={onLogin}
         />
       </div>
+      <div className="mt-4">
+        <GoogleLogin
+          onSuccess={handleGoogleSuccess}
+          onError={() => console.error("Google Login Failed")}
+        />
+      </div>
+
       <h1 className="text-center mt-4">
         Don't have an account?{" "}
         <span
